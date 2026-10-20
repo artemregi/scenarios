@@ -1,8 +1,8 @@
 """Ночной запуск run.py.
-    python schedule.py on        — включить (каждый день в 03:00)
-    python schedule.py on 05:30  — включить на своё время
-    python schedule.py off       — выключить
-    python schedule.py status    — проверить"""
+    python schedule.py on        – включить (каждый день в 03:00)
+    python schedule.py on 05:30  – включить на своё время
+    python schedule.py off       – выключить
+    python schedule.py status    – проверить"""
 import config  # первым: переключает на окружение .venv
 import base64
 import plistlib

@@ -1,5 +1,5 @@
 """Лента Reels блогера. Цифры берутся из ответов, которые страница Instagram получает сама
-(clips_connection: просмотры, лайки, комментарии, закреп) — своих запросов к API нет."""
+(clips_connection: просмотры, лайки, комментарии, закреп) – своих запросов к API нет."""
 import json
 import random
 import re
@@ -10,7 +10,7 @@ IG_EPOCH_MS = 1314220021721  # pk >> 23 = мс от этой точки → да
 
 
 class Blocked(Exception):
-    """Instagram просит вход или проверку — сбор останавливаем, аккаунт бережём."""
+    """Instagram просит вход или проверку – сбор останавливаем, аккаунт бережём."""
 
 
 def posted_at(pk):
@@ -72,7 +72,7 @@ def scan(page, username, want=40, max_scrolls=14):
         fol = followers(page)
         last, idle = -1, 0
         for _ in range(max_scrolls):
-            if len(got) >= want or idle >= 3:  # три прокрутки подряд без новых роликов — конец ленты
+            if len(got) >= want or idle >= 3:  # три прокрутки подряд без новых роликов – конец ленты
                 break
             idle = idle + 1 if len(got) == last else 0
             last = len(got)

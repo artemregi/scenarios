@@ -1,6 +1,6 @@
 """Проверка, что всё готово к работе. Печатает таблицу ✅ / ❌ и что сделать.
-    python doctor.py           — быстрая проверка
-    python doctor.py --full    — плюс настоящая расшифровка тестового ролика каждым способом"""
+    python doctor.py           – быстрая проверка
+    python doctor.py --full    – плюс настоящая расшифровка тестового ролика каждым способом"""
 import config  # первым: переключает на окружение .venv
 import subprocess
 import sys
@@ -47,7 +47,7 @@ def chrome():
     with sync_playwright() as pw:
         ctx = launch(pw, headless=True)
         try:
-            return logged_in(ctx), "вход в Instagram есть" if logged_in(ctx) else "Chrome есть, входа нет — python login.py"
+            return logged_in(ctx), "вход в Instagram есть" if logged_in(ctx) else "Chrome есть, входа нет – python login.py"
         finally:
             ctx.close()
 

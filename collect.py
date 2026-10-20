@@ -1,6 +1,6 @@
 """Шаг 1. Разведка: смотрит блогеров из bloggers.txt и находит залёты (просмотры ≥ 2 × медиана блогера).
-    python collect.py            — все блогеры (не больше 30 за запуск)
-    python collect.py ник1 ник2  — только эти"""
+    python collect.py            – все блогеры (не больше 30 за запуск)
+    python collect.py ник1 ник2  – только эти"""
 import config  # первым: переключает на окружение .venv
 import random
 import statistics

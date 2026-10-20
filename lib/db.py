@@ -1,4 +1,4 @@
-"""База data/reels.db — банк идей.
+"""База data/reels.db – банк идей.
 Блогер: active (в разведке) | proposed (нашла нейросеть, ждёт решения) | rejected.
 Ролик: new → outlier (залёт) → transcribed → scored (идея в банке) → scripted; или skipped."""
 import sqlite3
@@ -25,7 +25,7 @@ def connect():
 
 
 def active_bloggers(con):
-    """bloggers.txt — главный список. Всё, что в нём, — в разведке."""
+    """bloggers.txt – главный список. Всё, что в нём, – в разведке."""
     from lib.common import now
     names = []
     if config.BLOGGERS.exists():

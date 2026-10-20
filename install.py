@@ -32,11 +32,11 @@ if __name__ == "__main__":
         run(sys.executable, "-m", "venv", VENV)
     run(PY, "-m", "pip", "install", "-q", "--upgrade", "pip")
     run(PY, "-m", "pip", "install", "-q", "patchright", "requests", "python-dotenv", "yt-dlp")
-    # запасная расшифровка без интернета: на свежих версиях Python может не встать — это не страшно
+    # запасная расшифровка без интернета: на свежих версиях Python может не встать – это не страшно
     whisper = run(PY, "-m", "pip", "install", "-q", "faster-whisper", must=False)
     if not (ROOT / ".env").exists():
         shutil.copy(ROOT / ".env.example", ROOT / ".env")
     for d in ("data", "logs", "scripts", "knowledge"):
         (ROOT / d).mkdir(exist_ok=True)
-    print("\nГотово." + ("" if whisper else " Локальный whisper не встал — расшифровка будет через Groq/ElevenLabs/Gemini."))
+    print("\nГотово." + ("" if whisper else " Локальный whisper не встал – расшифровка будет через Groq/ElevenLabs/Gemini."))
     print("Дальше: впиши ключи в .env и запусти python3 doctor.py")

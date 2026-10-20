@@ -30,7 +30,7 @@ def launch(pw, headless=False):
     """Постоянный профиль Chrome: вход в Instagram сохраняется между запусками."""
     config.IG_PROFILE.mkdir(parents=True, exist_ok=True)
     ua = None
-    if headless:  # без окна Chrome подписывается как HeadlessChrome — подменяем на обычный
+    if headless:  # без окна Chrome подписывается как HeadlessChrome – подменяем на обычный
         os_part = "Windows NT 10.0; Win64; x64" if IS_WIN else "Macintosh; Intel Mac OS X 10_15_7"
         ua = f"Mozilla/5.0 ({os_part}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
     return pw.chromium.launch_persistent_context(

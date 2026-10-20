@@ -18,6 +18,6 @@ if __name__ == "__main__":
         try:
             step()
         except Exception as e:
-            log(f"{name}: упало — {e}\n{traceback.format_exc()}")
-            tg.notify(f"Шаг «{name}» упал: {str(e)[:300]}\nПодробности — в папке logs.")
+            log(f"{name}: упало – {e}\n{traceback.format_exc()}")
+            tg.notify(f"Шаг «{name}» упал: {str(e)[:300]}\nПодробности – в папке logs.")
     log("=== Готово ===")

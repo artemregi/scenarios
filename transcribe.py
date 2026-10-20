@@ -27,12 +27,12 @@ def main(limit=config.TRANSCRIBE_PER_RUN, ids=None):
         try:
             text, lang, caption, engine = speech.transcribe(r["id"])
         except Exception as e:
-            # не скачался даже со входом — больше не пробуем
+            # не скачался даже со входом – больше не пробуем
             closed = "isn't available" in str(e) or "not available" in str(e) or "login" in str(e).lower()
             con.execute("UPDATE reels SET error=?, updated=?, state=CASE WHEN ? THEN 'skipped' ELSE state END WHERE id=?",
                         (str(e)[:300], now(), int(closed), r["id"]))
             con.commit()
-            log(f"{r['id']}: не расшифровался — {str(e)[:200]}")
+            log(f"{r['id']}: не расшифровался – {str(e)[:200]}")
             continue
         is_ad = any(m in caption.lower() for m in config.AD_MARKERS)
         if len(text) < 80:  # речи почти нет, ролик держится на картинке и подписи

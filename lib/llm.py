@@ -1,4 +1,4 @@
-"""Вызов Claude через Claude Code (подписка ученика, отдельный ключ не нужен). Ответ — JSON."""
+"""Вызов Claude через Claude Code (подписка ученика, отдельный ключ не нужен). Ответ – JSON."""
 import json
 import re
 import shutil
@@ -16,12 +16,12 @@ class LLMError(Exception):
 def _claude():
     exe = shutil.which("claude")
     if not exe:
-        raise LLMError("не найдена программа claude — установи Claude Code")
+        raise LLMError("не найдена программа claude – установи Claude Code")
     return exe
 
 
 def command(args):
-    """Команда запуска claude с аргументами. На Windows claude бывает .cmd — его запускает только cmd,
+    """Команда запуска claude с аргументами. На Windows claude бывает .cmd – его запускает только cmd,
     а путь с пробелом (C:\\Users\\Ира Иванова\\...) cmd понимает только в двойных кавычках с /s."""
     exe = _claude()
     if IS_WIN and exe.lower().endswith((".cmd", ".bat")):
@@ -35,7 +35,7 @@ def ask_json(prompt, model, timeout=900):
     except LLMError as e:
         if not str(e).startswith("не JSON"):
             raise
-        return _ask(prompt + "\n\nВажно: ответ — строго валидный JSON, кавычки внутри строк экранированы.", model, timeout)
+        return _ask(prompt + "\n\nВажно: ответ – строго валидный JSON, кавычки внутри строк экранированы.", model, timeout)
 
 
 def _ask(prompt, model, timeout):

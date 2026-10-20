@@ -1,6 +1,6 @@
 """Звук чужого рилса → текст. Скачивается только звук, без аккаунта, во временную папку.
 Порядок: Groq → ElevenLabs → Gemini → whisper на компьютере (маленькая модель, 2 потока).
-Нет ключа — способ пропускается. Временные файлы удаляются сразу."""
+Нет ключа – способ пропускается. Временные файлы удаляются сразу."""
 import base64
 import json
 import re
@@ -21,7 +21,7 @@ class SpeechError(Exception):
 
 
 def download(reel_id, tmp):
-    """→ (путь к звуку, подпись к ролику). Сначала без аккаунта; закрыт — со входом из collect.py."""
+    """→ (путь к звуку, подпись к ролику). Сначала без аккаунта; закрыт – со входом из collect.py."""
     cmd = [sys.executable, "-m", "yt_dlp", "-q", "--no-warnings", "-f", "ba/b", "--write-info-json",
            "-o", str(tmp / "a.%(ext)s"), f"https://www.instagram.com/reel/{reel_id}/"]
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", timeout=180)
@@ -67,7 +67,7 @@ def gemini(audio):
                  "Если речи нет, верни пустую строку."},
         {"inline_data": {"mime_type": mime, "data": base64.b64encode(audio.read_bytes()).decode()}}]}]}
     r = None
-    for model in ("gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash"):  # перегружена — следующая
+    for model in ("gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash"):  # перегружена – следующая
         r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
                           params={"key": config.GEMINI_KEY}, json=body, timeout=300)
         if r.status_code not in (429, 500, 503, 404):
@@ -114,7 +114,7 @@ ENGINES = [("groq", lambda: config.GROQ_KEY, groq), ("elevenlabs", lambda: confi
 
 
 def transcribe(reel_id, only=None):
-    """→ (text, lang, caption, engine). only — проверить один конкретный способ."""
+    """→ (text, lang, caption, engine). only – проверить один конкретный способ."""
     with tempfile.TemporaryDirectory(prefix="reel_") as tmp:
         audio, caption = download(reel_id, Path(tmp))
         errors = []

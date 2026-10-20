@@ -3,8 +3,8 @@
 находит общее и придумывает поисковые запросы → поиск Instagram →
 у самых заметных авторов смотрим подписчиков → нейросеть оценивает каждого 0–10 по паспорту.
 Найденные ждут твоего решения на сайте (вкладка «Блогеры») или командой --add.
-    python discover.py           — найти (5–10 минут)
-    python discover.py --add 7   — добавить в разведку всех с оценкой 7 и выше"""
+    python discover.py           – найти (5–10 минут)
+    python discover.py --add 7   – добавить в разведку всех с оценкой 7 и выше"""
 import config  # первым: переключает на окружение .venv
 import json
 import random
@@ -27,14 +27,14 @@ QUERIES_PROMPT = """Паспорт блога автора:
 {passport}
 </passport>
 
-Блогеры, которых автор дал как образец, — их профили (описание, подписи к роликам, суть залетевших роликов):
+Блогеры, которых автор дал как образец, – их профили (описание, подписи к роликам, суть залетевших роликов):
 <профили>
 {profiles}
 </профили>
 
-1. Разбери профили: что у этих блогеров общего — тема, аудитория, формат роликов, подача. 2–4 предложения.
+1. Разбери профили: что у этих блогеров общего – тема, аудитория, формат роликов, подача. 2–4 предложения.
 2. Придумай {n} коротких поисковых запросов для поиска Instagram (2–4 слова), по которым найдутся ещё такие же
-   авторы под паспорт: половина по-русски, половина по-английски. Запросы — темы роликов, которые снимают такие
+   авторы под паспорт: половина по-русски, половина по-английски. Запросы – темы роликов, которые снимают такие
    авторы, а не названия профессий.
 Ответь только JSON-объектом: {{"common": "что общего", "queries": ["...", "..."]}}"""
 
@@ -169,17 +169,17 @@ def main():
                 except instagram.Blocked as e:
                     sys.exit(f"Instagram просит проверку: {e}. Запусти python login.py")
                 except Exception as e:
-                    log(f"@{u}: профиль не открылся — {str(e)[:120]}")
+                    log(f"@{u}: профиль не открылся – {str(e)[:120]}")
                     continue
                 ess = [r["essence"] for r in con.execute(
                     "SELECT essence FROM reels WHERE blogger=? AND essence IS NOT NULL ORDER BY multiplier DESC LIMIT 3", (u,))]
-                profiles.append(f"@{u}, подписчиков {pi.get('followers') or '?'}\nописание: {pi['bio'] or '—'}\n"
+                profiles.append(f"@{u}, подписчиков {pi.get('followers') or '?'}\nописание: {pi['bio'] or '–'}\n"
                                 + "".join(f"– подпись: {c[:200]}\n" for c in pi["captions"])
                                 + "".join(f"– суть залёта: {e}\n" for e in ess))
                 log(f"Профиль @{u}: описание {'есть' if pi['bio'] else 'нет'}, подписей {len(pi['captions'])}, залётов в банке {len(ess)}")
                 time.sleep(random.uniform(4, 8))
             # 2. нейросеть: что у них общего и как искать таких же
-            plan = llm.ask_json(QUERIES_PROMPT.format(passport=passport, profiles="\n".join(profiles) or "нет — ищи по паспорту",
+            plan = llm.ask_json(QUERIES_PROMPT.format(passport=passport, profiles="\n".join(profiles) or "нет – ищи по паспорту",
                                                       n=MAX_QUERIES), model=config.SCORE_MODEL, timeout=300)
             common = plan.get("common", "") if isinstance(plan, dict) else ""
             queries = [q for q in (plan.get("queries", []) if isinstance(plan, dict) else plan) if isinstance(q, str)][:MAX_QUERIES]
@@ -220,7 +220,7 @@ def main():
     items = "\n\n".join(f"@{u}, {c['followers']} подписчиков, запросы: {', '.join(sorted(c['queries']))}\n"
                         + "\n".join("– " + x for x in c["captions"]) for u, c in top)
     res = llm.ask_json(RATE_PROMPT.format(passport=passport, seeds=", ".join("@" + s for s in seeds) or "нет",
-                                          common=common or "—", items=items), model=config.SCORE_MODEL, timeout=300)
+                                          common=common or "–", items=items), model=config.SCORE_MODEL, timeout=300)
     by = {x["username"].lstrip("@").lower(): x for x in res if isinstance(x, dict) and x.get("username")}
     log("\nНайдены (оценка · подписчики · почему):")
     for u, c in sorted(top, key=lambda t: -int((by.get(t[0]) or {}).get("score") or 0)):
@@ -230,7 +230,7 @@ def main():
                     "VALUES (?,?,?,?,?,?,?)", (u, c["followers"], "proposed", sc, x.get("why"),
                                                "поиск: " + sorted(c["queries"])[0], now()))
         fol = f"{c['followers']:>9,}".replace(",", " ")
-        log(f"  {sc:>2} · {fol} · @{u} — {x.get('why', '')}")
+        log(f"  {sc:>2} · {fol} · @{u} – {x.get('why', '')}")
     con.commit()
     log("\nДобавить лучших: python discover.py --add 7  (или кнопками на сайте)")
 

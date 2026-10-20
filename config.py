@@ -45,7 +45,7 @@ REELS_PER_BLOGGER = 40          # сколько последних ролико
 MAX_BLOGGERS_PER_RUN = 30       # бережём аккаунт
 PAUSE_BETWEEN_BLOGGERS = (20, 60)
 OUTLIER_X = 2.0                 # залёт: просмотры ≥ 2 × медиана блогера
-MIN_AGE_DAYS = 2                # моложе — ещё набирает
+MIN_AGE_DAYS = 2                # моложе – ещё набирает
 MIN_REELS_FOR_MEDIAN = 5
 
 # Расшифровка
@@ -54,13 +54,13 @@ LOCAL_WHISPER_MODEL = "small"   # запасной вариант без инт�
 LOCAL_WHISPER_THREADS = 2
 
 # Сценарии
-SCORE_MODEL = os.getenv("SCORE_MODEL", "haiku")     # оценка пачкой — быстрая модель
+SCORE_MODEL = os.getenv("SCORE_MODEL", "haiku")     # оценка пачкой – быстрая модель
 WRITE_MODEL = os.getenv("WRITE_MODEL", "sonnet")    # сценарист и проверяющий; при подписке Max можно "opus"
 SCORE_BATCH = 8
-MIN_RELEVANCE = 6               # ниже — тема не переносится на твою аудиторию
+MIN_RELEVANCE = 6               # ниже – тема не переносится на твою аудиторию
 SCRIPTS_PER_RUN = 5
 PARALLEL = 3                    # сколько сценариев пишется одновременно
-ATTEMPTS = 2                    # не прошёл проверку — переписать один раз
+ATTEMPTS = 2                    # не прошёл проверку – переписать один раз
 MAX_OVERLAP = 20.0              # % совпадения формулировок с оригиналом
 FRESH_DAYS = 30                 # свежие залёты идут первыми
 

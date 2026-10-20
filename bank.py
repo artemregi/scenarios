@@ -1,4 +1,4 @@
-"""Сайт банка идей — http://localhost:8777 (открывается только на твоём компьютере).
+"""Сайт банка идей – http://localhost:8777 (открывается только на твоём компьютере).
     python bank.py"""
 import config  # первым: переключает на окружение .venv
 import json
@@ -80,7 +80,7 @@ def action(b):
             if act not in steps:
                 raise ValueError("Неизвестный шаг")
             start(act, steps[act])
-            return "Запущено. Ход работы — во вкладке «Журнал»"
+            return "Запущено. Ход работы – во вкладке «Журнал»"
         con.commit()
         return "Готово"
     finally:
@@ -132,7 +132,7 @@ class Handler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}"
-    print(f"Сайт банка идей: {url}  (закрыть — Ctrl+C)")
+    print(f"Сайт банка идей: {url}  (закрыть – Ctrl+C)")
     if "--no-open" not in sys.argv:
         threading.Timer(1, lambda: webbrowser.open(url)).start()
     try:
